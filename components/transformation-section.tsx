@@ -9,7 +9,7 @@ const TransformationSection = () => {
         height={70}
         squares={[100, 100]}
         squaresClassName="fill-white dark:fill-neutral-800 stroke-gray-400/10 dark:stroke-gray-400/5"
-        className="w-full h-full z-0 border-0 mask-[radial-gradient(700px_circle_at_center,white,transparent)] lg:mask-[radial-gradient(800px_circle_at_center,white,transparent)] xl:mask-[radial-gradient(1200px_circle_at_center,white,transparent)]"
+        className="w-full h-full z-0 border-0 mask-[radial-gradient(700px_circle_at_center,white,transparent)] lg:mask-[radial-gradient(800px_circle_at_center,white,transparent)] xl:mask-[radial-gradient(900px_circle_at_center,white,transparent)]"
       />
 
       <div className="relative max-w-340 mx-auto px-2 z-10">

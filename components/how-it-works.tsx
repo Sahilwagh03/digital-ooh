@@ -29,7 +29,7 @@ const howItWorksData = [
 
 const HowItWorks = () => {
   return (
-    <section className="relative w-full py-8 md:py-12">
+    <section className="relative w-full py-12 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
         
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12">

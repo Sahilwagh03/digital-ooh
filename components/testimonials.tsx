@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { InteractiveGridPattern } from "./ui/interactive-grid-pattern";
-
+import { generateHighlightSquares } from "@/constant/home";
+import { BackgroundRippleEffect } from "./ui/background-ripple-effect";
 const testimonialsData = [
   {
     id: 1,
@@ -58,14 +59,17 @@ const Testimonials = () => {
   return (
     <section className="relative w-full py-8 lg:py-14 overflow-hidden">
       {/* Background */}
-      <InteractiveGridPattern
-        width={70}
-        height={70}
-        squares={[100, 100]}
-        squaresClassName="fill-white dark:fill-neutral-800 stroke-gray-400/10 dark:stroke-gray-400/5"
+      {/* <InteractiveGridPattern
+        width={80}
+        height={80}
+        squares={[40, 40]}
+        squaresClassName="fill-white dark:fill-neutral-800 stroke-gray-400/10 dark:stroke-gray-400/5 hover:fill-orange-400/70 dark:hover:fill-orange-400/40"
         className="absolute inset-0 w-full h-full z-0 border-0"
-      />
-
+        coloredSquares={(cols, rows) =>
+          generateHighlightSquares(cols, rows, 5, 4)
+        }
+      /> */}
+      <BackgroundRippleEffect cellSize={80} rippleColor="orange-400" autoPlayInterval={3000}/>
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-16 z-10">
         {/* Heading */}
         <div className="flex flex-col gap-4 text-center items-center mb-10">
@@ -86,7 +90,7 @@ const Testimonials = () => {
               <div
                 key={item.id}
                 className={`group shrink-0 ${
-                  index !== 0 ? "-ml-4 sm:-ml-6 md:-ml-8" : ""
+                  index !== 0 ? "-ml-4" : ""
                 }`}
               >
                 <TestimonialCard item={item} index={index} />
@@ -139,9 +143,7 @@ const TestimonialCard = ({
         <h4 className="text-xs sm:text-sm font-semibold text-white">
           {item.name}
         </h4>
-        <p className="text-[10px] sm:text-xs text-white/80">
-          {item.role}
-        </p>
+        <p className="text-[10px] sm:text-xs text-white/80">{item.role}</p>
       </div>
     </div>
   );
