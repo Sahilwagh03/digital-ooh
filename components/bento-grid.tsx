@@ -28,7 +28,13 @@ const BentoGrid = () => {
               title="Lead Management System"
               desc="Capture, track, and nurture leads with AI-powered scoring and pipeline analytics."
             />
-            <DonutChart/>
+            <Image
+              src="/lead.jpeg"
+              alt="leads"
+              width={1280}
+              height={800}
+              className="w-full h-full"
+            />
           </Card>
 
           {/* Campaign Lifecycle */}
@@ -37,7 +43,13 @@ const BentoGrid = () => {
               title="Complete Campaign Lifecycle"
               desc="Track campaigns from proposal to execution with full visibility."
             />
-            <CampaignLifecycle/>
+            <Image
+              src="/lifecycle.jpeg"
+              alt="leads"
+              width={1280}
+              height={800}
+              className="w-full h-full object-cover"
+            />
           </Card>
 
           {/* Field Auditing */}
@@ -47,54 +59,13 @@ const BentoGrid = () => {
               desc="Verify campaign execution with real-time proof, GPS tagging, and automated reporting."
               badge="New"
             />
-            <div className="flex flex-col items-center justify-center gap-4 py-6">
-              {/* Avatar Stack */}
-              <div className="flex -space-x-4">
-                {[
-                  "https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-1.png",
-                  "https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-2.png",
-                  "https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-3.png",
-                  "https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-4.png",
-                ].map((src, i) => (
-                  <div
-                    key={i}
-                    className="w-18 h-18 rounded-full border-2 border-white dark:border-neutral-900 overflow-hidden shadow-sm"
-                  >
-                    <Image
-                      src={src}
-                      alt="avatar"
-                      width={64}
-                      height={64}
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                ))}
-                <div className="w-18 h-18 flex items-center justify-center rounded-full bg-neutral-200 dark:bg-neutral-800 text-sm font-medium border-2 border-white dark:border-neutral-900">
-                  +12
-                </div>
-              </div>
-
-              <p className="text-sm text-neutral-500 text-center max-w-55">
-                Teams collaborate in real-time to audit and verify on-ground
-                execution
-              </p>
-            </div>
-            <div className="pt-6 border-t border-neutral-200 dark:border-neutral-800 flex flex-col gap-3 text-xs text-neutral-500">
-              <div className="flex items-center justify-between">
-                <span>24+ active users</span>
-
-                <div className="flex items-center gap-1">
-                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                  <span className="text-neutral-600 dark:text-neutral-400">
-                    Live updates
-                  </span>
-                </div>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>Last sync: 2 min ago</span>
-                <span>98% accuracy</span>
-              </div>
-            </div>
+            <Image
+              src="/audit.jpeg"
+              alt="audit"
+              width={1280}
+              height={800}
+              className="w-full h-full max-h-72 object-contain"
+            />
           </Card>
 
           {/* Financial Control */}
@@ -104,7 +75,7 @@ const BentoGrid = () => {
               desc="Automated invoicing, payments, and predictive cash flow forecasting with AI insights."
               badge="AI-Powered"
             />
-            <RevenueChart/>
+            <RevenueChart />
           </Card>
         </div>
       </div>

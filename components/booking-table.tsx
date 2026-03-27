@@ -12,7 +12,7 @@ import {
 export const BookingTable = ({ data }: { data: any[] }) => {
   return (
     <div className="w-full rounded-xl border border-neutral-200 dark:border-neutral-800 overflow-hidden">
-      <Table className="overflow-x-hidden text-xs">
+      <Table className="overflow-x-hidden text-[0.675rem]">
         <TableHeader className="bg-accent">
           <TableRow>
             <TableHead>#</TableHead>
@@ -31,7 +31,7 @@ export const BookingTable = ({ data }: { data: any[] }) => {
             >
               <TableCell>{item.id}</TableCell>
 
-              <TableCell className="font-medium max-w-55 truncate">
+              <TableCell className="max-w-55 truncate">
                 {item.company}
               </TableCell>
 
