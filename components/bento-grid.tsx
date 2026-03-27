@@ -5,8 +5,6 @@ import Image from "next/image";
 import { RevenueChart } from "./revenue-chart";
 import { BookingTable } from "./booking-table";
 import { bookings } from "@/lib/booking-data";
-import { DonutChart } from "./donut";
-import { CampaignLifecycle } from "./workflow";
 
 const BentoGrid = () => {
   return (
@@ -23,7 +21,7 @@ const BentoGrid = () => {
             <BookingTable data={bookings} />
           </Card>
 
-          <Card>
+          <Card className="pb-0">
             <CardHeader
               title="Lead Management System"
               desc="Capture, track, and nurture leads with AI-powered scoring and pipeline analytics."
@@ -38,7 +36,7 @@ const BentoGrid = () => {
           </Card>
 
           {/* Campaign Lifecycle */}
-          <Card>
+          <Card className="pb-0">
             <CardHeader
               title="Complete Campaign Lifecycle"
               desc="Track campaigns from proposal to execution with full visibility."
@@ -53,7 +51,7 @@ const BentoGrid = () => {
           </Card>
 
           {/* Field Auditing */}
-          <Card>
+          <Card className="pb-0">
             <CardHeader
               title="Field Auditing App"
               desc="Verify campaign execution with real-time proof, GPS tagging, and automated reporting."

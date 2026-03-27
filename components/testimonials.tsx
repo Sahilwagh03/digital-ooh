@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import { InteractiveGridPattern } from "./ui/interactive-grid-pattern";
-import { generateHighlightSquares } from "@/constant/home";
-import { BackgroundRippleEffect } from "./ui/background-ripple-effect";
+
 const testimonialsData = [
   {
     id: 1,
@@ -58,10 +57,20 @@ const testimonialsData = [
 const Testimonials = () => {
   return (
     <section className="relative w-full py-8 lg:py-14 overflow-hidden">
-      <BackgroundRippleEffect cellSize={80} rippleColor="orange-400" autoPlayInterval={7000}/>
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-16 z-10">
+
+      {/* ✅ GRID (BEHIND) */}
+      <InteractiveGridPattern
+        width={70}
+        height={70}
+        squaresClassName="fill-transparent stroke-gray-400/10 dark:stroke-gray-400/20 hover:fill-orange-300 transition-all duration-300"
+        className="absolute inset-0 z-0 pointer-events-auto"
+      />
+
+      {/* ✅ CONTENT (pass-through) */}
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-16 z-10 pointer-events-none">
+
         {/* Heading */}
-        <div className="flex flex-col gap-4 text-center items-center mb-10">
+        <div className="flex flex-col gap-4 text-center items-center mb-10 pointer-events-auto">
           <h2 className="text-2xl sm:text-3xl md:text-5xl font-semibold tracking-tight leading-[1.1] max-w-xl">
             Trusted by <span className="text-orange-400">Leading</span> Media
             Owners Worldwide
@@ -73,14 +82,12 @@ const Testimonials = () => {
         </div>
 
         {/* Cards */}
-        <div className="flex justify-center">
+        <div className="flex justify-center pointer-events-auto">
           <div className="flex items-center overflow-x-auto sm:overflow-visible px-2 sm:px-0 scrollbar-hide">
             {testimonialsData.map((item, index) => (
               <div
                 key={item.id}
-                className={`group shrink-0 ${
-                  index !== 0 ? "-ml-4" : ""
-                }`}
+                className={`group shrink-0 ${index !== 0 ? "-ml-4" : ""}`}
               >
                 <TestimonialCard item={item} index={index} />
               </div>
@@ -94,11 +101,13 @@ const Testimonials = () => {
 
 export default Testimonials;
 
+type TestimonialItem = (typeof testimonialsData)[number];
+
 const TestimonialCard = ({
   item,
   index,
 }: {
-  item: (typeof testimonialsData)[number];
+  item: TestimonialItem;
   index: number;
 }) => {
   return (
@@ -117,22 +126,20 @@ const TestimonialCard = ({
         rotate: `${index % 2 === 0 ? "-2deg" : "2deg"}`,
       }}
     >
-      {/* Image */}
       <Image
         src={item.image}
-        alt={`${item.name} – ${item.role} at ${item.company}`}
+        alt={item.name}
         fill
-        sizes="(max-width: 640px) 140px, (max-width: 768px) 180px, 220px"
-        className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
-        quality={85}
+        className="object-cover transition-transform duration-500 ease-out group-hover:scale-110 pointer-events-auto"
       />
 
-      {/* Overlay */}
-      <div className="absolute bottom-0 left-0 w-full p-3 sm:p-4 bg-linear-to-t from-black/70 via-black/40 to-transparent">
+      <div className="absolute bottom-0 left-0 w-full p-3 sm:p-4 bg-gradient-to-t from-black/70 via-black/40 to-transparent pointer-events-auto">
         <h4 className="text-xs sm:text-sm font-semibold text-white">
           {item.name}
         </h4>
-        <p className="text-[10px] sm:text-xs text-white/80">{item.role}</p>
+        <p className="text-[10px] sm:text-xs text-white/80">
+          {item.role}
+        </p>
       </div>
     </div>
   );
