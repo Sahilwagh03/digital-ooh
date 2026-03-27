@@ -58,18 +58,7 @@ const testimonialsData = [
 const Testimonials = () => {
   return (
     <section className="relative w-full py-8 lg:py-14 overflow-hidden">
-      {/* Background */}
-      {/* <InteractiveGridPattern
-        width={80}
-        height={80}
-        squares={[40, 40]}
-        squaresClassName="fill-white dark:fill-neutral-800 stroke-gray-400/10 dark:stroke-gray-400/5 hover:fill-orange-400/70 dark:hover:fill-orange-400/40"
-        className="absolute inset-0 w-full h-full z-0 border-0"
-        coloredSquares={(cols, rows) =>
-          generateHighlightSquares(cols, rows, 5, 4)
-        }
-      /> */}
-      <BackgroundRippleEffect cellSize={80} rippleColor="orange-400" autoPlayInterval={3000}/>
+      <BackgroundRippleEffect cellSize={80} rippleColor="orange-400" autoPlayInterval={7000}/>
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-16 z-10">
         {/* Heading */}
         <div className="flex flex-col gap-4 text-center items-center mb-10">

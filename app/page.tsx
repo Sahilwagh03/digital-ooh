@@ -1,4 +1,6 @@
 import Clients from "@/components/client";
+import CTA from "@/components/cta";
+import FAQSection from "@/components/faq-section";
 import FeatureSection from "@/components/feature-section";
 import Hero from "@/components/hero";
 import HowItWorks from "@/components/how-it-works";
@@ -14,6 +16,8 @@ export default function Home() {
       <TransformationSection/>
       <HowItWorks/>
       <Testimonials/>
+      <FAQSection/>
+      <CTA/>
     </main>
   );
 }

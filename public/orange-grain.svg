@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="1" seed="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncR type="linear" slope="1.3"/>
+        <feFuncG type="linear" slope="1.3"/>
+        <feFuncB type="linear" slope="1.3"/>
+      </feComponentTransfer>
+      <feColorMatrix type="matrix" values="1 0 0 0 0
+                                           0 1 0 0 0
+                                           0 0 1 0 0
+                                           0 0 0 16 -8"/>
+    </filter>
+  </defs>
+  <!-- white base so noise has something to render against -->
+  <rect width="100%" height="100%" fill="white" filter="url(#grain)"/>
+</svg>
