@@ -130,8 +130,8 @@
 
 @theme inline {
   --animate-cell-ripple: cell-ripple var(--duration, 200ms) ease-out none 1
-  var(--delay, 0ms);
- 
+    var(--delay, 0ms);
+
   @keyframes cell-ripple {
     0% {
       opacity: 0.4;
@@ -143,4 +143,17 @@
       opacity: 0.4;
     }
   }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
 }

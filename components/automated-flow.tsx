@@ -75,8 +75,8 @@ export function AutomatedFlow() {
           <Circle ref={div5Ref}>
             <Icons.autoComplete />
           </Circle>
-          <span className="hidden lg:flex text-xs text-muted-foreground font-medium">
-            Auto Processing
+          <span className="hidden lg:flex text-xs text-muted-foreground font-medium text-center max-w-32">
+            Complete Campaign Lifecycle
           </span>
         </div>
         {/* Row 2 */}
@@ -97,7 +97,7 @@ export function AutomatedFlow() {
             <Icons.openai />
           </Circle>
           <span className="hidden lg:flex text-xs text-muted-foreground font-medium">
-            AI Engine
+            DigitalOOH Engine
           </span>
         </div>
         <div className="flex flex-col items-center gap-2">
@@ -122,8 +122,8 @@ export function AutomatedFlow() {
           <Circle ref={div7Ref}>
             <Icons.autoEmail />
           </Circle>
-          <span className="hidden lg:flex text-xs text-muted-foreground font-medium">
-            Auto Remainder
+          <span className="hidden lg:flex text-xs text-muted-foreground font-medium  text-center max-w-32">
+            Financial Control Center
           </span>
         </div>
       </div>

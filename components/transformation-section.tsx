@@ -3,7 +3,7 @@ import { InteractiveGridPattern } from "./ui/interactive-grid-pattern";
 
 const TransformationSection = () => {
   return (
-    <section className="relative w-full h-full py-6 lg:py-12 ">
+    <section className="relative w-full h-full py-6 lg:py-12">
       <InteractiveGridPattern
         width={70}
         height={70}
@@ -15,11 +15,10 @@ const TransformationSection = () => {
       <div className="relative max-w-340 mx-auto px-2 z-10">
         <div className="flex flex-col gap-4 text-center justify-center items-center">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.1] max-w-xl">
-            Stop Losing Revenue to Manual Chaos
+            Everything You Need, <span className="text-orange-400">Nothing</span> You Don't
           </h2>
-          <p className="font-medium text-neutral-600 dark:text-neutral-300 max-w-xs lg:max-w-md">
-            73% of media owners lose revenue to manual tracking errors. Not
-            anymore.
+          <p className="font-medium text-neutral-600 dark:text-neutral-300 max-w-xs lg:max-w-sm">
+            73% of media owners lose revenue to outdated systems. Not anymore.
           </p>
         </div>
         <AutomatedFlow />
