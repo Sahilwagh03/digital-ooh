@@ -2,16 +2,17 @@ import { InteractiveGridPattern } from "./ui/interactive-grid-pattern";
 import Logo from "./logo";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
+import OnboardingModal from "./onboarding-modal";
 
 const Hero = () => {
   return (
-    <section className="w-full -mt-18 sm:px-4 md:px-6 rounded-2xl">
-      <div className="relative overflow-hidden w-full lg:min-h-screen max-w-350 mx-auto rounded-2xl sm:rounded-3xl bg-white dark:bg-neutral-950">
+    <section className="w-full -mt-18">
+      <div className="relative overflow-hidden w-full lg:min-h-screen bg-white dark:bg-neutral-950">
         {/* ✅ GRID (interactive layer) */}
         <InteractiveGridPattern
           width={70}
           height={70}
-          squaresClassName="fill-white dark:fill-neutral-800 stroke-gray-400/10 dark:stroke-gray-400/20 hover:fill-orange-400 transition-colors duration-200"
+          squaresClassName="fill-white dark:fill-neutral-800 stroke-gray-400/10 dark:stroke-gray-400/20 hover:fill-orange-300 transition-colors duration-200"
           className="absolute inset-0 z-0 pointer-events-auto"
         />
 
@@ -46,12 +47,13 @@ const Hero = () => {
 
           {/* Buttons */}
           <div className="mt-8 flex items-center gap-3 flex-wrap justify-center pointer-events-auto">
-            <button className="flex items-center gap-2 px-6 py-3 rounded-xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-medium text-sm hover:bg-neutral-700 dark:hover:bg-neutral-200 transition">
+            <OnboardingModal>
+            <button className="cursor-pointer flex items-center gap-2 px-6 py-3 rounded-xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-medium text-sm hover:bg-neutral-700 dark:hover:bg-neutral-200 transition">
               Start Free Trial
               <ArrowUpRight className="w-4 h-4" />
             </button>
-
-            <button className="flex items-center gap-2 px-6 py-3 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-900/60 text-neutral-800 dark:text-neutral-200 font-medium text-sm hover:bg-white dark:hover:bg-neutral-800 transition backdrop-blur-sm">
+            </OnboardingModal>
+            <button className="cursor-pointer flex items-center gap-2 px-6 py-3 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-900/60 text-neutral-800 dark:text-neutral-200 font-medium text-sm hover:bg-white dark:hover:bg-neutral-800 transition backdrop-blur-sm">
               Book a Demo
             </button>
           </div>

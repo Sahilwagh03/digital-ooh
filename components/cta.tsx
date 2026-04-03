@@ -25,22 +25,21 @@ const CTA = () => {
 
         {/* Content */}
         <div className="relative z-10 flex flex-col gap-4 text-center items-center mb-6 lg:mb-12">
-          <h2 className="text-white text-2xl sm:text-3xl md:text-5xl font-semibold tracking-tight leading-[1.1] max-w-3xl">
-            Start Selling Smarter and Manage Business Effortlessly!
+          <h2 className="text-white text-2xl sm:text-3xl md:text-5xl font-semibold tracking-tight leading-[1.1] max-w-4xl">
+            Ready to Transform Your OOH Business? Start your free trial today.
           </h2>
           <p className="text-sm sm:text-base font-medium max-w-md leading-relaxed text-white/90">
-            Join thousands of sellers who have streamlined their e-commerce
-            business with Sellinity.
+            Join thousands of businesses using DigitalOOH to simplify operations, boost efficiency, and scale faster.
           </p>
         </div>
 
         <div className="relative z-10 flex items-center gap-3 justify-center">
           <button className="flex items-center gap-2 px-6 py-3 rounded-xl bg-neutral-900 text-white font-medium text-sm hover:bg-neutral-700 transition">
-            Get Started
+            Start Free Trail
             <ArrowUpRight className="w-4 h-4" />
           </button>
           <button className="flex items-center gap-2 px-6 py-3 rounded-xl border border-white/30 bg-white/10 text-white font-medium text-sm hover:bg-white/20 transition backdrop-blur-sm">
-            Watch Demo
+            Book a Demo
           </button>
         </div>
       </div>
