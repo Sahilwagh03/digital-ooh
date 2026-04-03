@@ -1,33 +1,87 @@
 "use client";
 
-import { OnboardingContextType, OnboardingState, VerifyData, WorkspaceData } from "@/types/onboarding";
-import { createContext, useContext, useState, ReactNode } from "react";
-
-// ---------------- TYPES ----------------
+import { OnboardingContextType, OnboardingState, VerifyData, WorkspaceData, LoadingState, VerifyErrors } from "@/types/onboarding";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 // ---------------- CONTEXT ----------------
 const OnboardingContext = createContext<OnboardingContextType | null>(null);
 
+// Initial state constants
+const initialOnboardingState: OnboardingState = {
+  step: 1,
+  workspace: {
+    businessName: "",
+    themeColor: "#000000",
+  },
+  verify: {
+    email: "",
+    phone: "",
+    otp: "",
+    isVerified: false,
+  },
+};
+
+const initialLoadingState: LoadingState = {
+  workspace: false,
+  verify: false,
+  calendly: false,
+};
+
 // ---------------- PROVIDER ----------------
 export const OnboardingProvider = ({ children }: { children: ReactNode }) => {
-  const [data, setData] = useState<OnboardingState>({
-    step: 1,
-    workspace: {
-      businessName: "",
-      themeColor: "#000000",
-    },
-    verify: {
-      email: "",
-      phone: "",
-      otp: "",
-      isVerified: false,
-    },
-  });
+  const [data, setData] = useState<OnboardingState>(initialOnboardingState);
+  const [isModalOpen, setIsModalOpenState] = useState(false);
+  const [loading, setLoadingState] = useState<LoadingState>(initialLoadingState);
+  const [verifyErrors, setVerifyErrorsState] = useState<VerifyErrors>({});
 
-  const setWorkspace = (payload: WorkspaceData) => {
-    setData((prev) => ({ ...prev, workspace: payload }));
+  // ============ MODAL CONTROL WITH DELAYED RESET ============
+  const handleSetIsModalOpen = (open: boolean) => {
+    setIsModalOpenState(open);
+    // If closing modal, delay reset to allow modal animation to complete first
+    if (!open) {
+      setTimeout(() => {
+        setData(initialOnboardingState);
+        setLoadingState(initialLoadingState);
+      }, 300); // Wait for modal close animation (~300ms)
+    }
   };
 
+  // ============ LOADING STATE ============
+  const setLoading = (step: keyof LoadingState, value: boolean) => {
+    setLoadingState((prev) => ({
+      ...prev,
+      [step]: value,
+    }));
+  };
+
+  // ============ VERIFICATION ERRORS ============
+  const setVerifyError = (field: keyof VerifyErrors, error: string | undefined) => {
+    setVerifyErrorsState((prev) => ({
+      ...prev,
+      [field]: error,
+    }));
+  };
+
+  const clearVerifyErrors = () => {
+    setVerifyErrorsState({});
+  };
+
+  // ============ WORKSPACE HANDLERS ============
+  const setWorkspace = (payload: Partial<WorkspaceData>) => {
+    setData((prev) => ({
+      ...prev,
+      workspace: { ...prev.workspace, ...payload },
+    }));
+  };
+
+  const setWorkspaceField = (field: keyof WorkspaceData, value: any) => {
+    setData((prev) => ({
+      ...prev,
+      workspace: { ...prev.workspace, [field]: value },
+    }));
+  };
+
+  // ============ VERIFY HANDLERS ============
   const setVerify = (payload: Partial<VerifyData>) => {
     setData((prev) => ({
       ...prev,
@@ -35,6 +89,14 @@ export const OnboardingProvider = ({ children }: { children: ReactNode }) => {
     }));
   };
 
+  const setVerifyField = (field: keyof VerifyData, value: any) => {
+    setData((prev) => ({
+      ...prev,
+      verify: { ...prev.verify, [field]: value },
+    }));
+  };
+
+  // ============ NAVIGATION ============
   const nextStep = () => {
     setData((prev) => ({ ...prev, step: prev.step + 1 }));
   };
@@ -47,20 +109,28 @@ export const OnboardingProvider = ({ children }: { children: ReactNode }) => {
     setData((prev) => ({ ...prev, step }));
   };
 
+  // ============ RESET ============
   const reset = () => {
-    setData({
-      step: 1,
-      workspace: { businessName: "", themeColor: "#000000" },
-      verify: { email: "", phone: "", otp: "", isVerified: false },
-    });
+    setData(initialOnboardingState);
+    setLoadingState(initialLoadingState);
+    setVerifyErrorsState({});
   };
 
   return (
     <OnboardingContext.Provider
       value={{
         data,
+        isModalOpen,
+        setIsModalOpen: handleSetIsModalOpen,
+        loading,
+        setLoading,
+        verifyErrors,
+        setVerifyError,
+        clearVerifyErrors,
         setWorkspace,
+        setWorkspaceField,
         setVerify,
+        setVerifyField,
         nextStep,
         prevStep,
         goToStep,

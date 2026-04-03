@@ -1,17 +1,15 @@
 "use client";
 
 import { useOnboarding } from "@/context/onboarding-context";
-import { useState } from "react";
 import { BrandColorPicker } from "./ui/color-picker";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 
 export const WorkspaceStep = () => {
-  const { data, setWorkspace, nextStep } = useOnboarding();
+  const { data, setWorkspaceField, loading, setLoading, nextStep } = useOnboarding();
 
-  const [businessName, setBusinessName] = useState(data.workspace.businessName);
-  const [themeColor, setThemeColor] = useState(data.workspace.themeColor);
-  const [loading, setLoading] = useState(false);
+  const { businessName, themeColor } = data.workspace;
+  const isLoading = loading.workspace;
 
   const handleSubmit = () => {
     if (!businessName) return;
@@ -21,17 +19,15 @@ export const WorkspaceStep = () => {
       themeColor,
     });
 
-    setWorkspace({ businessName, themeColor });
-
-    setLoading(true);
+    setLoading("workspace", true);
 
     setTimeout(() => {
-      setLoading(false);
+      setLoading("workspace", false);
       nextStep();
     }, 2500);
   };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center h-full gap-4">
         <div className="animate-spin w-10 h-10 border-2 border-black border-t-transparent rounded-full" />
@@ -61,7 +57,7 @@ export const WorkspaceStep = () => {
           </span>
           <Input
             value={businessName}
-            onChange={(e) => setBusinessName(e.target.value)}
+            onChange={(e) => setWorkspaceField("businessName", e.target.value)}
             placeholder="Business Name"
             className="h-11"
           />
@@ -75,7 +71,7 @@ export const WorkspaceStep = () => {
 
             <BrandColorPicker
               value={themeColor}
-              onChange={(color) => setThemeColor(color)}
+              onChange={(color) => setWorkspaceField("themeColor", color)}
             />
           </div>
         </div>
@@ -83,7 +79,8 @@ export const WorkspaceStep = () => {
 
       <Button
         onClick={handleSubmit}
-        className="w-full cursor-pointer bg-orange-400 hover:bg-orange-500 text-white py-5 rounded-lg text-sm font-medium"
+        disabled={!businessName}
+        className="w-full cursor-pointer bg-orange-400 hover:bg-orange-500 disabled:opacity-50 text-white py-5 rounded-lg text-sm font-medium"
       >
         Create My Workspace
       </Button>

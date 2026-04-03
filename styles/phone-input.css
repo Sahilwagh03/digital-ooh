@@ -1,0 +1,23 @@
+/* Phone input custom styles */
+
+/* Remove browser defaults */
+input[type="tel"]::-webkit-outer-spin-button,
+input[type="tel"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="tel"] {
+  -moz-appearance: textfield;
+}
+
+/* Placeholder styling */
+input[type="tel"]::placeholder {
+  color: var(--color-muted-foreground, #a1a1aa);
+}
+
+/* Focus styles inherited from parent */
+input[type="tel"]:focus {
+  outline: none;
+}
+

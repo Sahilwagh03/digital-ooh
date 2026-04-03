@@ -3,7 +3,9 @@
 import { useOnboarding } from "@/context/onboarding-context";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { Input } from "./ui/input";
+import { ValidatedInput } from "./ui/validated-input";
+import { PhoneInput } from "./ui/phone-input";
+import { validateEmail, validatePhone } from "@/lib/validation";
 import {
   Dialog,
   DialogContent,
@@ -20,33 +22,44 @@ import {
 } from "@/components/ui/input-otp";
 
 export const VerifyStep = () => {
-  const { nextStep } = useOnboarding();
+  const {
+    data,
+    setVerifyField,
+    loading,
+    setLoading,
+    nextStep,
+    verifyErrors,
+    setVerifyError,
+    clearVerifyErrors,
+  } = useOnboarding();
+  const [showOtpDialog, setShowOtpDialog] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isPhoneValid, setIsPhoneValid] = useState(false);
 
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const { email, phone, otp } = data.verify;
+  const isVerifyLoading = loading.verify;
 
-  const [otp, setOtp] = useState("");
-  const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const isFormValid = isEmailValid && isPhoneValid;
 
   // 👉 Send OTP
   const handleSendOtp = () => {
-    if (!email || !phone) return;
+    if (!isFormValid) return;
 
     console.log("Send OTP to:", { email, phone });
-
-    setOpen(true);
+    clearVerifyErrors();
+    setShowOtpDialog(true);
   };
 
   // 👉 Verify OTP
   const handleVerify = () => {
     if (otp.length < 6) return;
 
-    setLoading(true);
+    setLoading("verify", true);
 
     setTimeout(() => {
-      setLoading(false);
-      setOpen(false);
+      setLoading("verify", false);
+      setShowOtpDialog(false);
+      setVerifyField("isVerified", true);
       nextStep();
     }, 2000);
   };
@@ -57,7 +70,7 @@ export const VerifyStep = () => {
     nextStep();
   };
 
-  if (loading) {
+  if (isVerifyLoading) {
     return (
       <div className="flex flex-col items-center justify-center h-full gap-4">
         <div className="animate-spin w-10 h-10 border-2 border-black border-t-transparent rounded-full" />
@@ -84,36 +97,33 @@ export const VerifyStep = () => {
         </div>
 
         <div className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <span className="text-sm text-neutral-500 font-semibold">
-              Work Email
-            </span>
-            <Input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@company.com"
-              className="h-11"
-            />
-          </div>
+          <ValidatedInput
+            label="Gmail Address"
+            value={email}
+            onChange={(e) => setVerifyField("email", e.target.value)}
+            placeholder="yourname@gmail.com"
+            type="email"
+            className="h-11"
+            error={verifyErrors.email}
+            validator={validateEmail}
+            onValidationChange={setIsEmailValid}
+          />
 
-          <div className="flex flex-col gap-2">
-            <span className="text-sm text-neutral-500 font-semibold">
-              Mobile Number
-            </span>
-            <Input
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="+91 9876543210"
-              className="h-11"
-            />
-          </div>
+          <PhoneInput
+            label="Mobile Number"
+            value={phone}
+            onChange={(value) => setVerifyField("phone", value || "")}
+            error={verifyErrors.phone}
+            onValidationChange={setIsPhoneValid}
+          />
         </div>
 
         {/* Actions */}
         <div className="flex flex-col gap-3">
           <Button
             onClick={handleSendOtp}
-            className="w-full bg-orange-400 text-white py-5"
+            disabled={!isFormValid}
+            className="w-full bg-orange-400 text-white py-5 disabled:opacity-50 cursor-pointer"
           >
             Send Verification Code
           </Button>
@@ -128,7 +138,7 @@ export const VerifyStep = () => {
         </div>
       </div>
 
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog open={showOtpDialog} onOpenChange={setShowOtpDialog}>
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle>Verify your account</DialogTitle>
@@ -143,7 +153,7 @@ export const VerifyStep = () => {
             <InputOTP
               maxLength={6}
               value={otp}
-              onChange={(value) => setOtp(value)}
+              onChange={(value) => setVerifyField("otp", value)}
               className="w-full gap-2"
             >
               <InputOTPGroup className="flex-1 gap-1 *:data-[slot=input-otp-slot]:flex-1 *:data-[slot=input-otp-slot]:h-12 *:data-[slot=input-otp-slot]:text-lg *:data-[slot=input-otp-slot]:rounded-md *:data-[slot=input-otp-slot]:border">
@@ -171,7 +181,7 @@ export const VerifyStep = () => {
               <Button
                 onClick={handleVerify}
                 disabled={otp.length < 6}
-                className="flex-1 bg-orange-400 py-5 text-white"
+                className="cursor-pointer flex-1 bg-orange-400 py-5 text-white disabled:opacity-50"
               >
                 Verify & Activate
               </Button>
