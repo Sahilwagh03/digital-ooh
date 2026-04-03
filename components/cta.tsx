@@ -1,4 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
+import OnboardingModal from "./onboarding-modal";
 
 const CTA = () => {
   return (
@@ -29,16 +30,19 @@ const CTA = () => {
             Ready to Transform Your OOH Business? Start your free trial today.
           </h2>
           <p className="text-sm sm:text-base font-medium max-w-md leading-relaxed text-white/90">
-            Join thousands of businesses using DigitalOOH to simplify operations, boost efficiency, and scale faster.
+            Join thousands of businesses using DigitalOOH to simplify
+            operations, boost efficiency, and scale faster.
           </p>
         </div>
 
         <div className="relative z-10 flex items-center gap-3 justify-center">
-          <button className="flex items-center gap-2 px-6 py-3 rounded-xl bg-neutral-900 text-white font-medium text-sm hover:bg-neutral-700 transition">
-            Start Free Trail
-            <ArrowUpRight className="w-4 h-4" />
-          </button>
-          <button className="flex items-center gap-2 px-6 py-3 rounded-xl border border-white/30 bg-white/10 text-white font-medium text-sm hover:bg-white/20 transition backdrop-blur-sm">
+          <OnboardingModal>
+            <button className="cursor-pointer flex items-center gap-2 px-4 lg:px-6 py-3 rounded-xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-medium text-sm hover:bg-neutral-700 dark:hover:bg-neutral-200 transition">
+              Start Free Trial
+              <ArrowUpRight className="w-4 h-4" />
+            </button>
+          </OnboardingModal>
+          <button className="cursor-pointer flex items-center gap-2 px-4 lg:px-6 py-3 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-900/60 text-neutral-800 dark:text-neutral-200 font-medium text-sm hover:bg-white dark:hover:bg-neutral-800 transition backdrop-blur-sm">
             Book a Demo
           </button>
         </div>

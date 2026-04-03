@@ -6,7 +6,7 @@ import OnboardingModal from "./onboarding-modal";
 
 const Hero = () => {
   return (
-    <section className="w-full -mt-18">
+    <section className="w-full -mt-22">
       <div className="relative overflow-hidden w-full lg:min-h-screen bg-white dark:bg-neutral-950">
         {/* ✅ GRID (interactive layer) */}
         <InteractiveGridPattern
@@ -48,10 +48,10 @@ const Hero = () => {
           {/* Buttons */}
           <div className="mt-8 flex items-center gap-3 flex-wrap justify-center pointer-events-auto">
             <OnboardingModal>
-            <button className="cursor-pointer flex items-center gap-2 px-6 py-3 rounded-xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-medium text-sm hover:bg-neutral-700 dark:hover:bg-neutral-200 transition">
-              Start Free Trial
-              <ArrowUpRight className="w-4 h-4" />
-            </button>
+              <button className="cursor-pointer flex items-center gap-2 px-6 py-3 rounded-xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-medium text-sm hover:bg-neutral-700 dark:hover:bg-neutral-200 transition">
+                Start Free Trial
+                <ArrowUpRight className="w-4 h-4" />
+              </button>
             </OnboardingModal>
             <button className="cursor-pointer flex items-center gap-2 px-6 py-3 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-900/60 text-neutral-800 dark:text-neutral-200 font-medium text-sm hover:bg-white dark:hover:bg-neutral-800 transition backdrop-blur-sm">
               Book a Demo
