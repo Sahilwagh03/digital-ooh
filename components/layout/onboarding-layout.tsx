@@ -4,8 +4,8 @@ import { OnboardingStepper } from "@/components/onboarding-stepper";
 
 const OnboardingLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex w-full h-full bg-white rounded-xl">
-      <aside className="relative hidden w-105 border-r border-neutral-200 bg-neutral-50 lg:flex flex-col justify-between z-10 rounded-tl-xl rounded-bl-xl">
+    <div className="flex w-full h-full rounded-xl">
+      <aside className="relative hidden w-105 border-r lg:flex flex-col justify-between z-10 rounded-tl-xl rounded-bl-xl">
         <div className="p-6 flex flex-col gap-4">
           <div className="flex items-center gap-2">
             <div className="bg-orange-400 p-2 rounded-lg">

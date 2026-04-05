@@ -30,7 +30,6 @@ const OnboardingModalInner = ({ children }: { children: React.ReactNode }) => {
 
   const handleOpenChange = (open: boolean) => {
     setIsModalOpen(open);
-    // If closing manually, reset will be called by setIsModalOpen
   };
 
   return (

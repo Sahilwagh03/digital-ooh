@@ -3,6 +3,7 @@ import Logo from "./logo";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import OnboardingModal from "./onboarding-modal";
+import DashboardHeroMockup from "./dashboard-mock";
 
 const Hero = () => {
   return (
@@ -59,14 +60,8 @@ const Hero = () => {
           </div>
 
           {/* Image */}
-          <div className="mt-14 w-full max-w-6xl mx-auto pointer-events-auto">
-            <Image
-              src="/hero.png"
-              alt="Hero Image"
-              width={1280}
-              height={800}
-              className="w-full h-full rounded-tl-lg rounded-tr-lg lg:rounded-tl-2xl lg:rounded-tr-2xl"
-            />
+          <div className="mt-12 w-full max-w-6xl mx-auto pointer-events-auto">
+            <DashboardHeroMockup/>
           </div>
         </div>
       </div>

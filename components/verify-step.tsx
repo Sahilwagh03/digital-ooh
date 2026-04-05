@@ -73,7 +73,7 @@ export const VerifyStep = () => {
   if (isVerifyLoading) {
     return (
       <div className="flex flex-col items-center justify-center h-full gap-4">
-        <div className="animate-spin w-10 h-10 border-2 border-black border-t-transparent rounded-full" />
+        <div className="animate-spin w-10 h-10 border-2 border-t-transparent rounded-full" />
         <p className="text-sm text-neutral-600 text-center">
           Verifying your details...
         </p>

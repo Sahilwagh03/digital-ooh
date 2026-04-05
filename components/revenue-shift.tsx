@@ -98,7 +98,7 @@ const RevenueShift = () => {
           </div>
 
           {/* ── DIGITALOOH WAY CARD ── */}
-          <div className="flex-1 w-full rounded-xl border border-orange-200 dark:border-orange-900/50 bg-white dark:bg-neutral-900">
+          <div className="flex-1 w-full rounded-xl border border-orange-200 bg-white dark:bg-neutral-900">
             <div className="px-5 py-4 border-b border-orange-100 dark:border-orange-900/30">
               <p className="text-[10px] font-semibold uppercase tracking-widest text-orange-400 mb-0.5">
                 After

@@ -1,166 +1,131 @@
 "use client";
 
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   LayoutDashboard,
   BarChart3,
-  Calendar,
+  CalendarDays,
   Bell,
+  Users,
   Settings,
-  Search,
 } from "lucide-react";
-
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-
-import {
-  ResponsiveContainer,
-  AreaChart,
-  Area,
-} from "recharts";
+import { RevenueChart } from "./revenue-chart";
+import Logo from "./logo";
 
 const data = [
-  { name: "Jan", value: 2400 },
-  { name: "Feb", value: 3200 },
-  { name: "Mar", value: 2800 },
-  { name: "Apr", value: 4100 },
-  { name: "May", value: 3800 },
-  { name: "Jun", value: 5200 },
+  { month: "Jan", revenue: 120000 },
+  { month: "Feb", revenue: 180000 },
+  { month: "Mar", revenue: 250000 },
+  { month: "Apr", revenue: 320000 },
+  { month: "May", revenue: 410000 },
+  { month: "Jun", revenue: 520000 },
 ];
 
-export default function DashboardMock() {
-  return (
-    <div className="w-[1150px] h-[680px] bg-white dark:bg-neutral-900 border rounded-xl shadow-xl flex overflow-hidden">
+const chartConfig = {
+  revenue: {
+    label: "Revenue",
+    color: "",
+  },
+};
 
+export default function DashboardHeroMockup() {
+  return (
+    <div className="w-full bg-background rounded-tr-3xl rounded-tl-3xl shadow-2xl overflow-hidden flex">
       {/* Sidebar */}
-      <div className="w-[72px] border-r bg-neutral-50 dark:bg-neutral-950 flex flex-col items-center py-4 gap-6">
-        <div className="w-9 h-9 rounded-lg bg-black text-white flex items-center justify-center text-sm font-semibold">
-          S
+      <div className="w-20 min-w-20 border-r flex flex-col items-center py-6 gap-6">
+        <div className="bg-orange-400 p-2 rounded-lg">
+          <Logo className="w-6 h-6 text-white" />
         </div>
 
-        <div className="flex flex-col gap-6 mt-6 text-neutral-400">
-          <LayoutDashboard className="w-5 h-5 text-black dark:text-white" />
-          <BarChart3 className="w-5 h-5" />
-          <Calendar className="w-5 h-5" />
-          <Bell className="w-5 h-5" />
-          <Settings className="w-5 h-5" />
+        <div className="flex flex-col gap-6 mt-4">
+          <LayoutDashboard className="w-5 h-5 text-orange-400" />
+          <BarChart3 className="w-5 h-5 text-muted-foreground" />
+          <CalendarDays className="w-5 h-5 text-muted-foreground" />
+          <Users className="w-5 h-5 text-muted-foreground" />
+          <Bell className="w-5 h-5 text-muted-foreground" />
+          <Settings className="w-5 h-5 text-muted-foreground" />
         </div>
       </div>
 
-      {/* Main */}
-      <div className="flex-1 flex flex-col">
-
-        {/* Topbar */}
-        <div className="h-[56px] border-b px-6 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="text-sm font-semibold">Dashboard</div>
-            <div className="text-xs text-muted-foreground">Overview</div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 px-3 py-1.5 border rounded-md text-xs text-muted-foreground">
-              <Search className="w-3 h-3" /> Search
-            </div>
-            <div className="text-xs text-muted-foreground">Today</div>
-          </div>
+      {/* Main Content */}
+      <div className="flex-1 p-4 sm:p-6 max-h-125 md:max-h-none overflow-y-auto">
+        {/* Top Bar */}
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-xl sm:text-2xl font-semibold">Dashboard</h1>
+          <Select defaultValue="today">
+            <SelectTrigger className="w-27.5 sm:w-30">
+              <SelectValue placeholder="Select" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="today">Today</SelectItem>
+              <SelectItem value="week">This Week</SelectItem>
+              <SelectItem value="month">This Month</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
-        {/* Content */}
-        <div className="p-6 flex flex-col gap-6">
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <Card className="shadow-sm">
+            <CardHeader>
+              <CardTitle>Total Revenue</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">₹48.2L</div>
+              <Badge className="mt-2 bg-primary/10 text-primary">+32%</Badge>
+            </CardContent>
+          </Card>
 
-          {/* Stats Row */}
-          <div className="grid grid-cols-4 gap-6">
-            {[
-              { label: "Revenue", value: "₹8.0L", sub: "+14%" },
-              { label: "Bookings", value: "5", sub: "2 proposals" },
-              { label: "Campaigns", value: "20", sub: "5 active" },
-              { label: "Units", value: "11", sub: "17 available" },
-            ].map((item, i) => (
-              <div key={i} className="flex flex-col gap-1">
-                <span className="text-xs text-muted-foreground">{item.label}</span>
-                <span className="text-xl font-semibold tracking-tight">{item.value}</span>
-                <span className="text-xs text-muted-foreground">{item.sub}</span>
-              </div>
-            ))}
-          </div>
+          <Card className="shadow-sm">
+            <CardHeader>
+              <CardTitle>Total Bookings</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">1,284</div>
+              <p className="text-sm text-muted-foreground">+120 today</p>
+            </CardContent>
+          </Card>
 
-          {/* Main Grid */}
-          <div className="grid grid-cols-3 gap-6 flex-1">
+          <Card className="shadow-sm">
+            <CardHeader>
+              <CardTitle>Campaigns</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">96</div>
+              <p className="text-sm text-muted-foreground">32 active</p>
+            </CardContent>
+          </Card>
 
-            {/* Chart */}
-            <Card className="col-span-2 border">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium">Revenue</CardTitle>
-              </CardHeader>
-              <CardContent className="h-[220px]">
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={data}>
-                    <Area
-                      type="monotone"
-                      dataKey="value"
-                      stroke="#111"
-                      fillOpacity={0.04}
-                      fill="#111"
-                      strokeWidth={1.5}
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </CardContent>
-            </Card>
+          <Card className="shadow-sm">
+            <CardHeader>
+              <CardTitle>Units Booked</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">2,640</div>
+              <p className="text-sm text-muted-foreground">480 available</p>
+            </CardContent>
+          </Card>
+        </div>
 
-            {/* Activity Feed */}
-            <Card className="border">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium">Activity</CardTitle>
-              </CardHeader>
-              <CardContent className="flex flex-col gap-4 text-xs">
-                {[
-                  "Campaign launched",
-                  "New booking added",
-                  "Payment received",
-                  "Inventory updated",
-                ].map((item, i) => (
-                  <div key={i} className="flex justify-between items-center">
-                    <span className="text-muted-foreground">{item}</span>
-                    <span className="text-[10px] text-muted-foreground">2h</span>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-
-            {/* Table */}
-            <Card className="col-span-3 border flex flex-col">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium">Recent Campaigns</CardTitle>
-              </CardHeader>
-
-              <CardContent className="text-xs">
-                <div className="grid grid-cols-4 py-2 border-b text-muted-foreground">
-                  <span>Name</span>
-                  <span>Status</span>
-                  <span>Budget</span>
-                  <span>Start</span>
-                </div>
-
-                {[
-                  ["Summer Sale", "Active", "₹1.2L", "12 Mar"],
-                  ["Mall Ads", "Paused", "₹80K", "10 Mar"],
-                  ["Metro Boards", "Active", "₹2.4L", "08 Mar"],
-                  ["Airport Screens", "Draft", "₹60K", "05 Mar"],
-                ].map((row, i) => (
-                  <div key={i} className="grid grid-cols-4 py-3 border-b last:border-none">
-                    {row.map((cell, j) => (
-                      <span key={j} className="text-foreground">{cell}</span>
-                    ))}
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-
-          </div>
+        {/* Bottom Section */}
+        <div className="grid grid-cols-1">
+          {/* Chart */}
+          <Card className="shadow-sm">
+            <CardHeader>
+              <CardTitle>Revenue Growth</CardTitle>
+            </CardHeader>
+            <CardContent className="h-55 sm:h-65">
+              <RevenueChart />
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

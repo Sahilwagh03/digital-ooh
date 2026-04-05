@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { COUNTRIES } from "@/lib/countries";
@@ -67,21 +69,23 @@ export const CountrySelector = React.forwardRef<
 
   return (
     <div className="relative w-fit">
+      {/* Trigger */}
       <button
         ref={ref}
         onClick={() => setOpen(!open)}
+        onKeyDown={handleKeyDown}
         className={cn(
-          "h-11 px-3 py-2 rounded-tl-lg rounded-bl-lg bg-transparent flex items-center gap-2 transition-colors hover:bg-neutral-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+          "h-11 px-3 py-2 rounded-l-lg bg-transparent flex items-center gap-2 transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
           open && "ring-2 ring-ring"
         )}
         type="button"
       >
-        <span className="text-sm font-medium text-neutral-700 min-w-fit">
+        <span className="text-sm font-medium text-foreground min-w-fit">
           {selectedCountry?.dialCode}
         </span>
         <ChevronDown
           className={cn(
-            "h-4 w-4 text-neutral-500 transition-transform",
+            "h-4 w-4 text-muted-foreground transition-transform",
             open && "rotate-180"
           )}
         />
@@ -99,12 +103,12 @@ export const CountrySelector = React.forwardRef<
             }}
           />
 
-          {/* Dropdown menu */}
-          <div className="absolute top-full left-0 z-50 w-72 mt-2 bg-white rounded-lg border border-input shadow-lg overflow-hidden">
-            {/* Search box */}
-            <div className="p-3 border-b border-input bg-neutral-50">
+          {/* Dropdown */}
+          <div className="absolute top-full left-0 z-50 w-72 mt-2 bg-popover text-popover-foreground rounded-lg border border-border shadow-md overflow-hidden">
+            {/* Search */}
+            <div className="p-3 border-b border-border bg-muted">
               <div className="relative flex items-center">
-                <Search className="absolute left-3 h-4 w-4 text-neutral-400" />
+                <Search className="absolute left-3 h-4 w-4 text-muted-foreground" />
                 <input
                   autoFocus
                   type="text"
@@ -115,7 +119,7 @@ export const CountrySelector = React.forwardRef<
                     setHighlightedIndex(0);
                   }}
                   onKeyDown={handleKeyDown}
-                  className="w-full pl-9 pr-3 py-2 h-9 rounded-md border border-input bg-white text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="w-full pl-9 pr-3 py-2 h-9 rounded-md border border-input bg-background text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 />
                 {searchTerm && (
                   <button
@@ -123,18 +127,18 @@ export const CountrySelector = React.forwardRef<
                       setSearchTerm("");
                       setHighlightedIndex(0);
                     }}
-                    className="absolute right-3 p-1 hover:bg-neutral-200 rounded"
+                    className="absolute right-3 p-1 hover:bg-accent rounded"
                   >
-                    <X className="h-3 w-3 text-neutral-500" />
+                    <X className="h-3 w-3 text-muted-foreground" />
                   </button>
                 )}
               </div>
             </div>
 
-            {/* Country list */}
-            <div className="max-h-64 overflow-y-auto">
+            {/* List */}
+            <div className="max-h-32 overflow-y-auto">
               {filteredCountries.length === 0 ? (
-                <div className="p-4 text-center text-sm text-neutral-500">
+                <div className="p-4 text-center text-sm text-muted-foreground">
                   No countries found
                 </div>
               ) : (
@@ -146,16 +150,17 @@ export const CountrySelector = React.forwardRef<
                     className={cn(
                       "w-full px-4 py-3 flex items-center gap-3 text-left text-sm transition-colors",
                       index === highlightedIndex
-                        ? "bg-orange-50 text-orange-900"
-                        : "hover:bg-neutral-50 text-neutral-900",
-                      value === country.code && "bg-orange-100 border-l-2 border-orange-400"
+                        ? "bg-accent text-accent-foreground"
+                        : "hover:bg-accent text-foreground",
+                      value === country.code &&
+                        "bg-muted border-l-2 border-primary"
                     )}
                     type="button"
                   >
                     <span className="text-lg">{country.flag}</span>
                     <div className="flex-1">
                       <div className="font-medium">{country.name}</div>
-                      <div className="text-xs text-neutral-500">
+                      <div className="text-xs text-muted-foreground">
                         {country.code} • {country.dialCode}
                       </div>
                     </div>
