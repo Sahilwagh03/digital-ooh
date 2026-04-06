@@ -49,7 +49,6 @@ export const OnboardingStepper = () => {
 
             {/* Right side (text) */}
             <div
-              onClick={() => goToStep(step.id)}
               className="pb-6 cursor-pointer"
             >
               <p

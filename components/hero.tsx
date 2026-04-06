@@ -1,6 +1,5 @@
 import { InteractiveGridPattern } from "./ui/interactive-grid-pattern";
 import Logo from "./logo";
-import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import OnboardingModal from "./onboarding-modal";
 import DashboardHeroMockup from "./dashboard-mock";
